@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dictionary - Add Word</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Add a Word</h1>
+        <nav class="menu">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('lookup') }}">Look up a word</a>
+            <a href="{{ url_for('delete') }}">Delete a word</a>
+        </nav>
+        <form action="{{ url_for('add') }}" method="post"  enctype="multipart/form-data">
+            <input type="text" name="word" placeholder="Word" required>
+            <input type="text" name="pronunciation" placeholder="Pronunciation" required>
+            <div>
+              <label for="audio">Audio:</label>
+              <input type="file" id="audio" name="audio" accept="audio/*" max="1048576">
+            </div>
+            <div>
+              <p>OR</p>
+              <input type="text" id="audio_url" name="audio_url" placeholder="Audio URL">
+            </div>
+            <input type="text" name="word_class" placeholder="Word Class" required>
+            <textarea name="etymology" placeholder="Etymology"></textarea>
+            <h3>Meanings:</h3>
+            <ul>
+                <li><input type="text" name="meanings" placeholder="Meaning 1" required></li>
+                <li><input type="text" name="meanings" placeholder="Meaning 2"></li>
+                <li><input type="text" name="meanings" placeholder="Meaning 3"></li>
+            </ul>
+            <h3>Synonyms:</h3>
+            <ul>
+                <li><input type="text" name="synonyms" placeholder="Synonym 1" required></li>
+                <li><input type="text" name="synonyms" placeholder="Synonym 2"></li>
+                <li><input type="text" name="synonyms" placeholder="Synonym 3"></li>
+            </ul>
+            <h3>Antonyms:</h3>
+            <ul>
+                <li><input type="text" name="antonyms" placeholder="Antonym 1" required></li>
+                <li><input type="text" name="antonyms" placeholder="Antonym 2"></li>
+                <li><input type="text" name="antonyms" placeholder="Antonym 3"></li>
+            </ul>
+            <button type="submit">Add Word</button>
+        </form>
+        {% if success %}
+        <p class="success">{{ success }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

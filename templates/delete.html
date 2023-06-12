@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dictionary - Delete Word</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Delete a Word</h1>
+        <nav class="menu">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('lookup') }}">Look up a word</a>
+            <a href="{{ url_for('add') }}">Add a word</a>
+        </nav>
+        <form action="{{ url_for('delete') }}" method="post">
+            <input type="text" name="word" placeholder="Enter a word" required>
+            <button type="submit">Delete Word</button>
+        </form>
+        {% if success %}
+        <p class="success">{{ success }}</p>
+        {% elif error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+

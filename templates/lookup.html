@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dictionary - Lookup</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Look up a Word</h1>
+        <nav class="menu">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('add') }}">Add a word</a>
+            <a href="{{ url_for('delete') }}">Delete a word</a>
+        </nav>
+        <form action="{{ url_for('lookup') }}" method="post">
+            <input type="text" name="word" placeholder="Enter a word" required>
+            <button type="submit">Lookup</button>
+        </form>
+        {% if word_data %}
+        <div class="word-data">
+            <h2>{{ word_data.word }}</h2>
+            <p>Pronunciation: {{ word_data.pronunciation }}</p>
+            <h3>Meanings:</h3>
+            <ul>
+                {% for meaning in word_data.meanings %}
+                <li>{{ meaning }}</li>
+                {% endfor %}
+            </ul>
+            <h3>Synonyms:</h3>
+            <p>{{ ', '.join(word_data.synonyms) }}</p>
+            <h3>Antonyms:</h3>
+            <p>{{ ', '.join(word_data.antonyms) }}</p>
+        </div>
+        {% elif error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+
